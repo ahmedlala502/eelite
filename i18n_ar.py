@@ -14,7 +14,7 @@ brand names, figures and units. The live Arabic site does the same.
 KEEP = {
     # The deployed Arabic build translates the tagline, so it is copy, not a
     # Latin lockup. It lives in AR below.
-    "Elite", "ELITƎ", "E", "AR", "EN",
+    "Elite", "ELITƎ", "ELIT", "E", "AR", "EN",
     "24.9M", "17.9M", "13.9M", "206.2K", "930", "40", "10", "75",
     "you@example.com", "you@company.com", "+966 …",
     "Copyright ©",
@@ -531,6 +531,34 @@ AR.update({
     "Rituals Cosmetics campaign film": "فيلم حملة Rituals Cosmetics",
     "Play the Rituals Cosmetics film": "تشغيل فيلم Rituals Cosmetics",
     "The Back Burner campaign still": "لقطة من حملة The Back Burner",
+})
+
+# Film-reel strings, generated from case_studies.WITH_MEDIA.
+AR.update({
+    "Creators": "صنّاع المحتوى",
+    "The films.": "الأفلام.",
+    "« Featured work »": "« أعمال مختارة »",
+    '12M REACH // 118 CREATORS': '12M وصول // 118 صانع محتوى',
+    '13.9M REACH // 58 CREATORS': '13.9M وصول // 58 صانع محتوى',
+    '17.9M REACH // 87 CREATORS': '17.9M وصول // 87 صانع محتوى',
+    '19.7M REACH // 360 CREATORS': '19.7M وصول // 360 صانع محتوى',
+    '2.1M REACH // 1 CREATOR': '2.1M وصول // صانع محتوى واحد',
+    '24.9M REACH // 186 CREATORS': '24.9M وصول // 186 صانع محتوى',
+    '571.5K REACH // 8 CREATORS': '571.5K وصول // 8 صنّاع محتوى',
+    '58 creators in Saudi Arabia, reaching a combined 13.9M followers.': '58 صانع محتوى في السعودية، بوصول تراكمي إلى 13.9M متابع.',
+    '87 creators in Saudi Arabia, reaching a combined 17.9M followers.': '87 صانع محتوى في السعودية، بوصول تراكمي إلى 17.9M متابع.',
+    '98.5K REACH // 2 CREATORS': '98.5K وصول // صانعَي محتوى',
+    'A focused group of 2 creators in Saudi Arabia, reaching a combined 98.5K followers.': 'مجموعة مركّزة من صانعَي محتوى في السعودية، بوصول تراكمي إلى 98.5K متابع.',
+    'A focused group of 8 creators in Saudi Arabia, reaching a combined 571.5K followers.': 'مجموعة مركّزة من 8 صنّاع محتوى في السعودية، بوصول تراكمي إلى 571.5K متابع.',
+    'A network of 118 creators in Saudi Arabia, reaching a combined 12M followers.': 'شبكة من 118 صانع محتوى في السعودية، بوصول تراكمي إلى 12M متابع.',
+    'A network of 186 creators in Kuwait, reaching a combined 24.9M followers.': 'شبكة من 186 صانع محتوى في الكويت، بوصول تراكمي إلى 24.9M متابع.',
+    'A network of 360 creators in Saudi Arabia, reaching a combined 19.7M followers.': 'شبكة من 360 صانع محتوى في السعودية، بوصول تراكمي إلى 19.7M متابع.',
+    'A single creator in Saudi Arabia, reaching 2.1M followers.': 'صانع محتوى واحد في السعودية، بوصول إلى 2.1M متابع.',
+    'Kuwait // Fashion & accessories': 'الكويت // أزياء وإكسسوارات',
+    'Saudi Arabia // Beauty': 'السعودية // تجميل',
+    'Saudi Arabia // Cafe': 'السعودية // مقاهٍ',
+    'Saudi Arabia // Restaurant': 'السعودية // مطاعم',
+    'Saudi Arabia': 'السعودية',
 })
 
 AR_KEYED = {

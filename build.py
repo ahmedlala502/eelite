@@ -37,9 +37,8 @@ ICONS = {
 }
 
 LOGO_URL = "assets/img/elite-logo.svg"
-WORDMARK = (f'<a class="wordmark" href="index.html" aria-label="Elite — home">'
-            f'<span class="wordmark__asset"><img class="wordmark__image" src="{LOGO_URL}" alt="Elite"></span>'
-            f'<span class="wordmark__monogram" aria-hidden="true">E</span></a>')
+WORDMARK = ('<a class="wordmark mark" href="index.html" aria-label="Elite — home">'
+            'ELIT<span class="flip">E</span></a>')
 
 
 def head(title, desc, page):
@@ -53,7 +52,7 @@ def head(title, desc, page):
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600&family=Red+Hat+Display:wght@300;400;500;700&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/elite.css">
 <link rel="icon" href="{LOGO_URL}">
 <script>(function(){{try{{var t=localStorage.getItem('elite-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>

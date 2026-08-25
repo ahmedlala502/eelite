@@ -1077,3 +1077,127 @@ html[dir="rtl"] .crew__more{margin-left:0;margin-right:-8px}
 @media (prefers-reduced-motion:reduce){
   .story:hover .story__media video{transform:none}
 }
+
+
+/* ═══════════════════════════════════════ FILM REEL ════════════════════════
+   Featured campaign films as full-width alternating rows. */
+.reel-head{text-align:center;margin-bottom:var(--s-16)}
+.reel-kicker{font-size:.8rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:var(--s-3)}
+.reel-title{font-size:clamp(2.6rem,1.6rem + 4.6vw,5.4rem);line-height:.95;font-weight:900;
+  letter-spacing:-.03em;text-transform:uppercase;color:var(--text)}
+
+.reel{border-left:1px solid var(--border);border-right:1px solid var(--border)}
+.reel__row{display:grid;grid-template-columns:1fr;border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);margin-top:-1px}
+@media (min-width:960px){
+  .reel__row{grid-template-columns:7fr 5fr}
+  .reel__side{border-left:1px solid var(--border)}
+  .reel__row[data-flip="true"] .reel__media{order:2;border-left:1px solid var(--border)}
+  .reel__row[data-flip="true"] .reel__side{order:1;border-left:0}
+}
+html[dir="rtl"] .reel__side{border-left:0;border-right:1px solid var(--border)}
+html[dir="rtl"] .reel__row[data-flip="true"] .reel__media{border-left:0;border-right:1px solid var(--border)}
+html[dir="rtl"] .reel__row[data-flip="true"] .reel__side{border-right:0}
+
+.reel__media{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--bg-sunken);
+  padding:clamp(14px,1.6vw,24px)}
+.reel__hatch{position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(45deg,var(--border) 0 1px,transparent 1px 8px)}
+.reel__media>video,.reel__media>img{position:relative;z-index:1;width:100%;height:100%;
+  object-fit:cover;object-position:top center;border-radius:18px;display:block}
+.reel__play{position:absolute;z-index:3;bottom:clamp(24px,3vw,40px);right:clamp(24px,3vw,40px);
+  width:64px;height:64px;border-radius:50%;cursor:pointer;display:grid;place-items:center;
+  background:rgba(10,10,11,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.28);
+  color:#fff;padding:0;transition:background var(--dur-2) var(--ease),transform var(--dur-2) var(--ease)}
+html[dir="rtl"] .reel__play{right:auto;left:clamp(24px,3vw,40px)}
+.reel__play:hover{background:var(--gold-500);border-color:var(--gold-500);color:#0A0A0B}
+.reel__play svg{width:26px;height:26px}
+.reel__play .ico-pause{display:none}
+.reel__play[aria-pressed="true"] .ico-play{display:none}
+.reel__play[aria-pressed="true"] .ico-pause{display:block}
+.reel__badge{position:absolute;z-index:3;bottom:clamp(24px,3vw,40px);left:clamp(24px,3vw,40px);
+  background:rgba(10,10,11,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22);
+  border-radius:14px;padding:11px 18px;color:#fff;font-size:.72rem;font-weight:600;
+  letter-spacing:.04em;font-variant-numeric:tabular-nums;unicode-bidi:isolate}
+html[dir="rtl"] .reel__badge{left:auto;right:clamp(24px,3vw,40px)}
+
+.reel__side{display:flex;flex-direction:column}
+.reel__ident{position:relative;display:flex;align-items:center;gap:14px;padding:14px;
+  border-bottom:1px solid var(--border);background:var(--bg-sunken)}
+.reel__logo{position:relative;z-index:1;width:64px;height:64px;flex:none;border-radius:20px;
+  overflow:hidden;display:grid;place-items:center;background:#fff;border:4px solid var(--bg)}
+.reel__logo img{width:100%;height:100%;object-fit:contain;padding:6px}
+.reel__who{position:relative;z-index:1;min-width:0}
+.reel__name{font-size:clamp(1.3rem,1.1rem + .7vw,1.7rem);line-height:1.05;font-weight:900;
+  letter-spacing:-.02em;text-transform:uppercase;color:var(--text);unicode-bidi:isolate}
+.reel__role{margin-top:4px;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-muted)}
+.reel__body{padding:clamp(18px,2.2vw,28px);display:grid;gap:18px;align-content:start}
+.reel__quote{font-size:clamp(1.15rem,.95rem + .9vw,1.7rem);line-height:1.35;font-weight:500;
+  letter-spacing:-.01em;color:var(--text)}
+.reel__figs{display:flex;flex-wrap:wrap;gap:28px}
+html[dir="rtl"] .reel__figs{flex-direction:row-reverse;justify-content:flex-end}
+.reel__figs div{display:grid;gap:2px}
+.reel__figs b{font-size:1.6rem;font-weight:700;color:var(--gold-600);line-height:1;
+  font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.reel__figs span{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.reel__body .crew{margin-top:0}
+.reel__body .crew__face,.reel__body .crew__more{border-color:var(--bg-sunken);background:var(--ink-100)}
+.reel__body .crew__more{color:var(--text-muted)}
+
+@media (prefers-reduced-motion:reduce){.reel__play{transition:none}}
+
+
+/* ═══════════════════════════════════ HEADER — matched to the sister build ══
+   Same typography and layout language as elite-redesign-full: a text lockup,
+   Montserrat nav labels with a gold underline, and outlined chip actions. */
+.nav__inner{height:66px;gap:clamp(12px,3vw,40px)}
+
+/* Wordmark: ELITƎ set in Red Hat Display, mirrored final E. */
+.wordmark.mark{
+  font-family:"Red Hat Display",system-ui,sans-serif;font-weight:300;
+  font-size:1.16rem;letter-spacing:.34em;text-indent:.34em;white-space:nowrap;
+  display:inline-block;color:var(--text);text-decoration:none;
+}
+.wordmark.mark .flip{display:inline-block;transform:scaleX(-1);color:var(--gold-500)}
+html[dir="rtl"] .wordmark.mark{text-indent:0;letter-spacing:.2em}
+
+/* Nav labels: uppercase Montserrat with a gold underline that draws in. */
+.nav__links{gap:clamp(14px,2.2vw,30px)}
+.nav__link{
+  font-family:Montserrat,system-ui,sans-serif;font-weight:500;font-size:.735rem;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--text-muted);
+  padding:8px 0;background:none;border-radius:0;position:relative;
+}
+.nav__link:hover{color:var(--text);background:none}
+.nav__link[aria-current="page"]{color:var(--text);font-weight:500}
+.nav__link::after{
+  content:"";position:absolute;left:0;right:0;bottom:2px;top:auto;height:1px;width:auto;
+  background:var(--gold-500);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--dur-3,.3s) var(--ease-out,cubic-bezier(.4,0,.2,1));
+}
+html[dir="rtl"] .nav__link::after{transform-origin:right}
+.nav__link:hover::after,.nav__link[aria-current="page"]::after{transform:scaleX(1)}
+
+/* Actions: outlined pills rather than filled icon buttons. */
+.nav__actions{gap:8px;margin-left:clamp(8px,2vw,22px)}
+html[dir="rtl"] .nav__actions{margin-left:0;margin-right:clamp(8px,2vw,22px)}
+.nav .icon-btn{
+  height:34px;min-width:34px;padding:0 12px;border-radius:99px;
+  border:1px solid var(--border);background:transparent;color:var(--text-muted);
+  font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.1em;
+  gap:6px;
+}
+.nav .icon-btn:hover{border-color:var(--border-strong);color:var(--text);background:transparent}
+.nav .icon-btn svg{width:15px;height:15px}
+.nav__cta{
+  font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:.72rem;
+  letter-spacing:.11em;text-transform:uppercase;border-radius:99px;height:34px;padding:0 18px;
+}
+/* Touch input needs a bigger target than the 34px desktop chip. */
+@media (pointer:coarse){
+  .nav .icon-btn{height:44px;min-width:44px;padding:0 16px}
+  .nav__cta{height:44px}
+  .nav__link{padding:12px 0}
+}

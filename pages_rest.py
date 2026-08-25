@@ -163,11 +163,88 @@ def story_grid():
     return "".join(out)
 
 
+
+def film_reel():
+    """Featured campaign films as full-width alternating rows: media on one
+    side, the campaign's identity and figures on the other, flipping each row."""
+    CAT = {"Restaurant": "Restaurant", "Cafe": "Cafe", "Fashion": "Fashion & accessories",
+           "Beauty": "Beauty", "Perfume": "Perfume", "": ""}
+    rows = []
+    filmed = [r for r in case_studies.WITH_MEDIA if r.get("video")]
+    for i, rec in enumerate(filmed):
+        name = rec["name"]
+        role = " // ".join([b for b in (rec["market"], CAT.get(rec["category"], "")) if b])
+        creators = str(rec["influencers"]).lstrip("+")
+        # The reference badge showed a runtime; the figures we hold are reach and
+        # roster, so the badge carries those rather than a made-up duration.
+        badge = "%s REACH // %s %s" % (rec["followers"], creators,
+                                      "CREATOR" if creators == "1" else "CREATORS")
+        poster = ' poster="%s"' % rec["shots"][0] if rec.get("shots") else ""
+        logo = ('<span class="reel__logo"><img src="%s" alt="" loading="lazy" decoding="async"></span>'
+                % rec["logo"]) if rec.get("logo") else ""
+        n = int(creators or 0)
+        if n == 1:
+            who = "A single creator"
+        elif n >= 100:
+            who = "A network of %d creators" % n
+        elif n < 20:
+            who = "A focused group of %d creators" % n
+        else:
+            who = "%d creators" % n
+        where = " in %s" % rec["market"] if rec["market"] else ""
+        reach = ("reaching %s followers." % rec["followers"]) if n == 1 else (
+                 "reaching a combined %s followers." % rec["followers"])
+        quote = "%s%s, %s" % (who, where, reach)
+
+        rows.append(f"""
+        <article class="reel__row" data-flip="{'true' if i % 2 else 'false'}">
+          <div class="reel__media">
+            <div class="reel__hatch" aria-hidden="true"></div>
+            <video class="story__video" muted loop playsinline preload="none"{poster} aria-label="{name} campaign film"><source src="{rec['video']}" type="video/mp4"></video>
+            <button class="reel__play" type="button" data-video-toggle aria-pressed="false" aria-label="Play the {name} film">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path class="ico-play" d="M8 5.5v13l11-6.5z"/><path class="ico-pause" d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z"/></svg>
+            </button>
+            <span class="reel__badge">{badge}</span>
+          </div>
+          <div class="reel__side">
+            <div class="reel__ident">
+              <div class="reel__hatch" aria-hidden="true"></div>
+              {logo}
+              <div class="reel__who">
+                <h3 class="reel__name">{name}</h3>
+                <p class="reel__role">{role}</p>
+              </div>
+            </div>
+            <div class="reel__body">
+              <p class="reel__quote">{quote}</p>
+              <div class="reel__figs">
+                <div><b>{rec['followers']}</b><span>Followers</span></div>
+                <div><b>{rec['influencers']}</b><span>Creators</span></div>
+              </div>
+              {story_crew(rec)}
+            </div>
+          </div>
+        </article>""")
+
+    return """
+  <section class="section section--sunken" aria-labelledby="reel-h">
+    <div class="container">
+      <div class="reel-head reveal">
+        <p class="reel-kicker">&laquo; Featured work &raquo;</p>
+        <h2 class="reel-title" id="reel-h">The films.</h2>
+      </div>
+      <div class="reel">%s
+      </div>
+    </div>
+  </section>""" % "".join(rows)
+
+
+
 CASES = f"""
 <main id="main">
   {pagehead("SUCCESS IN ACTION","Stories From Our Clients",
     "Real campaigns, real creators, real numbers. Filter by category to find work close to yours.")}
-
+  {film_reel()}
   <section class="section section--tight">
     <div class="container">
       <div class="spread reveal" style="gap:var(--s-4)">

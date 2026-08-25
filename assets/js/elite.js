@@ -405,7 +405,7 @@
   function stopFilm(v) {
     if (!v) return;
     v.pause();
-    var card = v.closest('.story');
+    var card = v.closest('.story') || v.closest('.reel__row');
     var btn = card && card.querySelector('[data-video-toggle]');
     if (btn) btn.setAttribute('aria-pressed', 'false');
     if (playingVideo === v) playingVideo = null;
@@ -417,13 +417,13 @@
     var p = v.play();
     if (p && p.catch) p.catch(function () { stopFilm(v); });
     playingVideo = v;
-    var card = v.closest('.story');
+    var card = v.closest('.story') || v.closest('.reel__row');
     var btn = card && card.querySelector('[data-video-toggle]');
     if (btn) btn.setAttribute('aria-pressed', 'true');
   }
 
   document.querySelectorAll('[data-video-toggle]').forEach(function (btn) {
-    var card = btn.closest('.story');
+    var card = btn.closest('.story') || btn.closest('.reel__row');
     var video = card && card.querySelector('video');
     if (!video) return;
 
@@ -433,7 +433,10 @@
       if (video.paused) startFilm(video); else stopFilm(video);
     });
 
-    if (!reduced && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    // Hover preview on the grid cards only; the reel rows are large enough
+    // that the badge is the right control.
+    if (!reduced && card.classList.contains('story') &&
+        window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
       card.addEventListener('mouseenter', function () { startFilm(video); });
       card.addEventListener('mouseleave', function () { stopFilm(video); video.currentTime = 0; });
     }
@@ -443,7 +446,7 @@
     var filmObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (!e.isIntersecting) stopFilm(e.target); });
     }, { threshold: 0 });
-    document.querySelectorAll('.story video').forEach(function (v) { filmObserver.observe(v); });
+    document.querySelectorAll('video.story__video').forEach(function (v) { filmObserver.observe(v); });
   }
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) stopFilm(playingVideo);
