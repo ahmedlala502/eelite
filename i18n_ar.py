@@ -536,7 +536,6 @@ AR.update({
 # Film-reel strings, generated from case_studies.WITH_MEDIA.
 AR.update({
     "Creators": "صنّاع المحتوى",
-    "Case studies.": "دراسات الحالة.",
     "« Featured work »": "« أعمال مختارة »",
     '12M REACH // 118 CREATORS': '12M وصول // 118 صانع محتوى',
     '13.9M REACH // 58 CREATORS': '13.9M وصول // 58 صانع محتوى',
