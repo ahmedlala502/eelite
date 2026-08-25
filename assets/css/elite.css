@@ -1201,3 +1201,8 @@ html[dir="rtl"] .nav__actions{margin-left:0;margin-right:clamp(8px,2vw,22px)}
   .nav__cta{height:44px}
   .nav__link{padding:12px 0}
 }
+
+/* Long single words must never spill their card at large text zoom. */
+.service-card__label b,.service-card__label span,.reel__name,.story__meta .name{
+  overflow-wrap:break-word;hyphens:auto;
+}
