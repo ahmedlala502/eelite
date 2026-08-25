@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELITƎ — right-to-left layer
+   Loaded only by the Arabic pages, after elite.css. It mirrors direction and
+   swaps the type stack; it changes no colour, size, spacing scale or component
+   shape, so the Arabic site is the same design read the other way round.
+
+   Rule of thumb: only physical properties (left/right, padding-left,
+   margin-left, translateX) need an entry here. Anything already written with
+   logical properties, flexbox or grid mirrors itself.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[dir="rtl"] {
+  /* Arabic face first, the Latin stack behind it for brand names and figures. */
+  --font: "Tajawal", "Plus Jakarta Sans", system-ui, -apple-system,
+          "Segoe UI", Tahoma, sans-serif;
+  --font-editorial: "Almarai", "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  --font-ar: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+}
+
+[dir="rtl"] body {
+  font-family: var(--font);
+  /* Arabic needs a little more leading than the Latin setting. */
+  line-height: 1.75;
+}
+
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3,
+[dir="rtl"] h4, [dir="rtl"] .display {
+  font-family: var(--font-editorial);
+  line-height: 1.35;
+  /* Latin display tracking is negative; Arabic must never be tightened. */
+  letter-spacing: 0;
+}
+
+/* Arabic has no case, so the Latin sheet's uppercase treatments turn into
+   letter-spaced noise. Keep the size and colour, drop the transform. */
+[dir="rtl"] .eyebrow,
+[dir="rtl"] .hero__scroll,
+[dir="rtl"] .demo-total,
+[dir="rtl"] .marquee-control,
+[dir="rtl"] .trust__label,
+[dir="rtl"] .pagehead__title .tag,
+[dir="rtl"] .story__meta .place,
+[dir="rtl"] .footer h4 {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Latin runs inside Arabic text — brand names, figures, the wordmark — keep
+   their own face and stay left-to-right inside the RTL flow. */
+[dir="rtl"] .wordmark,
+[dir="rtl"] .stat__value,
+[dir="rtl"] .kpi__value,
+[dir="rtl"] .logo-chip,
+[dir="rtl"] .story__stats b,
+[dir="rtl"] [lang="en"],
+[dir="rtl"] .num,
+[dir="rtl"] .pct {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+/* ── directional utilities ───────────────────────────────────────────────── */
+[dir="rtl"] .skip-link { left: auto; right: 16px; }
+
+/* Arrow glyphs point the way the reader travels. */
+[dir="rtl"] .ico--arrow,
+[dir="rtl"] .link-arrow svg,
+[dir="rtl"] .btn svg.ico--arrow { transform: scaleX(-1); }
+/* The hover nudge must keep the flip, or the arrow snaps back to pointing
+   right the moment the pointer arrives. */
+[dir="rtl"] .btn:hover .ico--arrow { transform: scaleX(-1) translateX(3px); }
+/* Rows and buttons that lean towards the reader lean the other way. */
+[dir="rtl"] .step:hover { transform: translateX(-4px); }
+[dir="rtl"] .inline-field button:hover { transform: translateX(-2px); }
+
+/* Anything positioned from a physical edge gets mirrored. */
+[dir="rtl"] .hero__orbit { right: auto; left: clamp(11%, 18vw, 24%); }
+[dir="rtl"] .hero__emblem { right: auto; left: -4%; }
+[dir="rtl"] .emblem { right: auto; left: -8%; }
+[dir="rtl"] .service-card__num { left: auto; right: var(--s-5); }
+[dir="rtl"] .service-card__label { left: auto; right: var(--s-5); }
+[dir="rtl"] .story__play { right: auto; left: var(--s-5); }
+[dir="rtl"] .story__play svg { margin-left: 0; margin-right: 2px; }
+[dir="rtl"] .drawer { right: auto; left: 0; transform: translateX(-100%); }
+[dir="rtl"] .drawer.is-open { transform: translateX(0); }
+[dir="rtl"] .chip .count { margin-left: 0; margin-right: 6px; }
+[dir="rtl"] .dashboard-demo__period { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .bar-row .pct { text-align: left; }
+/* The fill grows from the reading edge, so its gradient has to run that way
+   too or the dark end lands where the light one does in English. */
+[dir="rtl"] .bar-row .fill { background: linear-gradient(270deg, var(--gold-600), var(--gold-400)); }
+
+/* The newsletter field keeps its round submit button inside the input; both
+   the button and the room made for it have to change sides. */
+[dir="rtl"] .inline-field .input { padding-right: var(--s-4); padding-left: 56px; }
+[dir="rtl"] .inline-field button { right: auto; left: 5px; }
+
+/* The marquee runs the other way so it still reads "into" the page. */
+[dir="rtl"] .marquee__track { animation-direction: reverse; }
+
+/* Inputs and selects: caret and chevron on the correct side. */
+[dir="rtl"] .input, [dir="rtl"] .textarea, [dir="rtl"] .select { text-align: right; }
+[dir="rtl"] .select { background-position: left var(--s-4) center; padding-inline: var(--s-4) var(--s-9); }
+[dir="rtl"] .check { flex-direction: row-reverse; justify-content: flex-end; }
+
+/* Numerals stay Western, as they do on gc-elite.com's own Arabic pages. */
+[dir="rtl"] [data-count],
+[dir="rtl"] .stat__value,
+[dir="rtl"] .kpi__value { font-variant-numeric: tabular-nums; }
+
+/* Focus ring, toast and scrollbars are centred or symmetrical in elite.css and
+   need no mirroring — overriding them only knocks them off centre. */
+
+@media (max-width: 760px) {
+  [dir="rtl"] .dashboard-demo__period { margin-right: 19px; }
+}

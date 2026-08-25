@@ -1,0 +1,5 @@
+.superdesign/tmp/
+__pycache__/
+*.py[cod]
+
+_harvest/
