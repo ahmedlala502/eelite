@@ -231,7 +231,7 @@ def film_reel():
     <div class="container">
       <div class="reel-head reveal">
         <p class="reel-kicker">&laquo; Featured work &raquo;</p>
-        <h2 class="reel-title" id="reel-h">The films.</h2>
+        <h2 class="reel-title" id="reel-h">Case studies.</h2>
       </div>
       <div class="reel">%s
       </div>
