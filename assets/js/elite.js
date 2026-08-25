@@ -396,6 +396,59 @@
     });
   });
 
+
+  /* ---------- Campaign films -------------------------------------------
+     Muted, looping, preload="none". Only one plays at a time; hover previews
+     on precise pointers, the badge is the control everywhere else. */
+  var playingVideo = null;
+
+  function stopFilm(v) {
+    if (!v) return;
+    v.pause();
+    var card = v.closest('.story');
+    var btn = card && card.querySelector('[data-video-toggle]');
+    if (btn) btn.setAttribute('aria-pressed', 'false');
+    if (playingVideo === v) playingVideo = null;
+  }
+
+  function startFilm(v) {
+    if (!v || playingVideo === v) return;
+    stopFilm(playingVideo);
+    var p = v.play();
+    if (p && p.catch) p.catch(function () { stopFilm(v); });
+    playingVideo = v;
+    var card = v.closest('.story');
+    var btn = card && card.querySelector('[data-video-toggle]');
+    if (btn) btn.setAttribute('aria-pressed', 'true');
+  }
+
+  document.querySelectorAll('[data-video-toggle]').forEach(function (btn) {
+    var card = btn.closest('.story');
+    var video = card && card.querySelector('video');
+    if (!video) return;
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (video.paused) startFilm(video); else stopFilm(video);
+    });
+
+    if (!reduced && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      card.addEventListener('mouseenter', function () { startFilm(video); });
+      card.addEventListener('mouseleave', function () { stopFilm(video); video.currentTime = 0; });
+    }
+  });
+
+  if ('IntersectionObserver' in window) {
+    var filmObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (!e.isIntersecting) stopFilm(e.target); });
+    }, { threshold: 0 });
+    document.querySelectorAll('.story video').forEach(function (v) { filmObserver.observe(v); });
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stopFilm(playingVideo);
+  });
+
   /* ---------- Current year -------------------------------------------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
