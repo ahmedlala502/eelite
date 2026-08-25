@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from build import page, ICONS
-from assets_map import SERVICE_IMAGES
+from assets_map import SERVICE_IMAGES, BRAND_LOGOS
 
 
 def _slug(text):
@@ -15,11 +15,19 @@ MARQUEE_B = ["Jones the Grocer","Sumosan","MNKY HSE","Tashas Cafe","Signor Sassi
              "MYAZŪ","Urth Caffe","Vero Moda","Kiko","Fred","Solitaire"]
 
 def chips(names):
-    # The wordmark chip is the design's own treatment; the names are the real
-    # client names as gc-elite.com lists them.
-    return "".join(
-        f'<span class="logo-chip logo-chip--fallback" role="img" aria-label="{n}" title="{n}">'
-        f'<span aria-hidden="true">{n}</span></span>' for n in names)
+    # Real brand logos where available; text wordmark fallback otherwise.
+    out = []
+    for n in names:
+        logo = BRAND_LOGOS.get(n)
+        if logo:
+            out.append(
+                f'<span class="logo-chip" role="img" aria-label="{n}" title="{n}">'
+                f'<img src="{logo}" alt="{n}" loading="lazy" decoding="async"></span>')
+        else:
+            out.append(
+                f'<span class="logo-chip logo-chip--fallback" role="img" aria-label="{n}" title="{n}">'
+                f'<span aria-hidden="true">{n}</span></span>')
+    return "".join(out)
 
 SERVICES = [
  ("01","Influencer","Discovery",
